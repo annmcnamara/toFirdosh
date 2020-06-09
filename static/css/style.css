@@ -24,6 +24,9 @@ body{
 .bg-c-gray{
     background: linear-gradient(45deg, rgb(172, 168, 168),#636061);
 }
+.bg-c-darkgray{
+    background: linear-gradient(45deg, rgb(102, 99, 99), rgb(20, 20, 20));
+}
 
 
 .card {
