@@ -22,7 +22,7 @@ def show_apis():
         f'<a href="/api/v1.0/ids">/api/v1.0/states</a><br/>'       
         f'<a href="/api/v1.0/cases">/api/v1.0/cases</a><br/>' 
         f'<a href="/api/v1.0/cases/TX">/api/v1.0/cases/state_id</a><br/>' 
-        f'<a href="/api/v1.0/deaths">/api/v1.0/deaths/2020-06-07</a><br/>' 
+        f'<a href="/api/v1.0/deaths/2020-06-07">/api/v1.0/deaths/2020-06-07</a><br/>' 
         f'<a href="/"><h4>Back</h4></a><br/>' 
     )    
 

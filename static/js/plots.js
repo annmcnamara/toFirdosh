@@ -25,9 +25,9 @@ function buildPanels(deaths, cases, population){
   PANEL.html("");
   //add the data to the panel div
   PANEL.append("h4").text(`${state_name}`);
-  PANEL.append("h6").text(`Cases: ${cases}`);
-  PANEL.append("h6").text(`Deaths: ${deaths}`);
-  PANEL.append("h6").text(`Population: ${population}`);
+  PANEL.append("h6").text(`Total Cases: ${numberWithCommas(cases)}`);
+  PANEL.append("h6").text(`Total Deaths: ${numberWithCommas(deaths)}`);
+  PANEL.append("h6").text(`Population: ${numberWithCommas(population)}`);
 
   //select and empty the cards 
   //populate the cards
@@ -59,7 +59,7 @@ function buildPie(deaths, cases, pop){
 
   var piedata = [{
     values: [(deaths/pop), (cases/pop), (unaffected/pop)],
-    labels: ['Deaths', 'Cases', 'Unaffected'],
+    labels: ['Total Deaths', 'Total Cases', 'Total Unaffected'],
     hole: 0.6,
     text:"Cases",
     textposition: 'inside',
@@ -78,11 +78,13 @@ function buildPie(deaths, cases, pop){
     height: 290,
     width: 300, 
     showlegend:true, 
-    margin:{l:25, r:20, t:20, b:30}, 
+    legend_orientation:'h',
+    margin:{l:25, r:20, t:0, b:30}, 
     legend: {
-      x: 0,
+      x: -0.0,
       xanchor: 'left',
-      y: -0.30, 
+      y: -0.0, 
+      yanchor: 'top',
       legend_orientation:'h'
     }, 
   };
@@ -154,7 +156,7 @@ function makeBarChart(dates, trace1y, trace2y, statename, dataname, divname){
   var mydata = [trace1, trace2];
   
   var mylayout = {
-    title: statename+': Actual Versus Predicted ' + dataname,
+    title: `<b>${statename}: Actual Versus Predicted ${dataname}</b>`,
     margin: { t: 30, l: 150 },
     xaxis: {
       autorange: true,
@@ -179,7 +181,7 @@ function makeBarChart(dates, trace1y, trace2y, statename, dataname, divname){
     },
     yaxis: { 
       title:"Number of " + dataname
-    }
+    }, 
   };
   
   // var update = {
@@ -227,7 +229,7 @@ function buildDashboard(state){
     // call function makeBarChart(dates, trace1y, trace2y, statename, dataname, divname){
 
     var statename = data[0].State_Name;
-    makeBarChart(dates, deaths,      deathspred,      statename, "Deaths",       "bubble");
+    makeBarChart(dates, deaths,      deathspred,      statename, "Total Deaths", "bubble");
     makeBarChart(dates, cases,       casespred,       statename, "Daily Cases",  "bubble2");
     makeBarChart(dates, dailydeaths, preddailydeaths, statename, "Daily Deaths", "dailydeaths");
 
@@ -251,19 +253,20 @@ function buildDashboard(state){
             yanchor: "bottom", 
             side:"right", 
             title: {
-              text: "Number of Actual Deaths", 
+              text: "Total Deaths", 
               side:  "right"
             }
           }
         }];
 
-        lat = lat[0]
-        lon = lon[0]
+        lat = lat[0];
+        lon = lon[0];
+        zoom = 4.5;
 
         if(wholeMap == true){  //center on whole us
-          lon = -95.7129;
-          lat = 38.0902;
-          zoom = 7;
+          lon  = -95.7129;
+          lat  = 38.0902;
+          zoom = 2.5;
           wholeMap = false;
         }
      
@@ -275,7 +278,7 @@ function buildDashboard(state){
               lon: lon, 
               lat: lat
             }, 
-            zoom: 3, 
+            zoom: zoom, 
             margin:{"r":0,"t":0,"l":0,"b":50}
             },
             width : 650, 
